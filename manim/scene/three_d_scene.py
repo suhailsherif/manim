@@ -52,6 +52,7 @@ class ThreeDScene(Scene):
         theta: Optional[float] = None,
         gamma: Optional[float] = None,
         distance: Optional[float] = None,
+        zoom: Optional[float] = None,
         frame_center: Optional[Union["Mobject", Sequence[float]]] = None,
     ):
         """
@@ -59,6 +60,10 @@ class ThreeDScene(Scene):
 
         Parameters
         ----------
+
+        zoom : int or float, optional
+            The zoom factor of the camera.
+
         phi : int or float, optional
             The polar angle i.e the angle between Z_AXIS and Camera through ORIGIN in radians.
 
@@ -75,6 +80,8 @@ class ThreeDScene(Scene):
             The new center of the camera frame in cartesian coordinates.
 
         """
+        if zoom is not None:
+            self.renderer.camera.set_zoom(zoom)
         if phi is not None:
             self.renderer.camera.set_phi(phi)
         if theta is not None:
@@ -167,6 +174,7 @@ class ThreeDScene(Scene):
         theta: Optional[float] = None,
         gamma: Optional[float] = None,
         distance: Optional[float] = None,
+        zoom: Optional[float] = None,
         frame_center: Optional[Union["Mobject", Sequence[float]]] = None,
         added_anims: Iterable["Animation"] = [],
         **kwargs,
@@ -177,6 +185,10 @@ class ThreeDScene(Scene):
 
         Parameters
         ----------
+
+        zoom : int or float, optional
+            The zoom factor of the camera.
+
         phi : int or float, optional
             The polar angle i.e the angle between Z_AXIS and Camera through ORIGIN in radians.
 
@@ -198,6 +210,7 @@ class ThreeDScene(Scene):
         """
         anims = []
         value_tracker_pairs = [
+            (zoom, self.renderer.camera.zoom_tracker),
             (phi, self.renderer.camera.phi_tracker),
             (theta, self.renderer.camera.theta_tracker),
             (distance, self.renderer.camera.distance_tracker),

@@ -58,7 +58,7 @@ class CameraMoveTest(ThreeDScene):
         axes = ThreeDAxes()
         self.add(axes)
         self.add(Dot([1, 2, 3]))
-        self.move_camera(phi=PI / 8, theta=-PI / 8, frame_center=[1, 2, 3])
+        self.move_camera(phi=PI / 8, theta=-PI / 8, frame_center=[1, 2, 3], zoom=3)
 
 
 class AmbientCameraMoveTest(ThreeDScene):
